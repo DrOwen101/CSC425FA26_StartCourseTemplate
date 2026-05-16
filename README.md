@@ -101,43 +101,57 @@ Create a free GitHub account
 3. During installation, remember the password you set for the `postgres` superuser
 4. Default port is `5432` (keep this unless you have a conflict)
 
-### Step 10: Access PostgreSQL Dashboard
-1. **Option A - pgAdmin (comes with PostgreSQL)**:
-   - Launch pgAdmin from your applications
-   - Create a new server connection
-   - Enter your password when prompted
-   
-2. **Option B - VSCode Extension**:
-   - Install the PostgreSQL extension in VSCode
-   - Click the PostgreSQL icon in the sidebar
-   - Create a new connection with your credentials
+### Step 10: Create Your Course Database
 
-### Step 11: Create Your Course Database
-1. In pgAdmin or your PostgreSQL client:
-   - Right-click on "Databases"
-   - Select "Create" → "Database"
-   - Name it `CSC425FA26`
-   - Click Save
-   
-2. **Alternative - Using Terminal**:
+**Follow these commands in order:**
+
+1. **Connect to PostgreSQL** (run this in your terminal):
    ```bash
    psql -U postgres
-   CREATE DATABASE CSC425FA26;
-   \l  # List databases to confirm creation
-   \q  # Quit psql
+   ```
+   Enter your postgres password when prompted.
+
+2. **Create the database** (run this inside the `postgres=#` prompt):
+   ```sql
+   CREATE DATABASE csc425fa26;
+   ```
+   You should see: `CREATE DATABASE`
+
+3. **Verify the database was created** (list all databases):
+   ```sql
+   \l
+   ```
+   Look for `csc425fa26` in the list.
+
+4. **Exit PostgreSQL**:
+   ```sql
+   \q
    ```
 
-### Step 12: Configure Database Connection
+5. **Connect to your new database** (run this in your terminal):
+   ```bash
+   psql -U postgres -d csc425fa26
+   ```
+   You should now see `csc425fa26=#` as your prompt.
+
+6. **Exit when done**:
+   ```sql
+   \q
+   ```
+
+### Step 11: Configure Database Connection
 1. Create a `.env` file in your project root (if not already present)
 2. Add your PostgreSQL connection details:
    ```
    DB_HOST=localhost
    DB_PORT=5432
-   DB_NAME=CSC425FA26
+   DB_NAME=csc425fa26
    DB_USER=postgres
    DB_PASSWORD=your_password_here
    ```
 3. **IMPORTANT**: Never commit your `.env` file to Git (it should be in `.gitignore`)
+
+**Note:** Replace `your_password_here` with the actual password you set during PostgreSQL installation.
 
 ## Understanding Your React Starter App
 
@@ -174,7 +188,7 @@ CSC425FA26/
 ✅ App accessible in browser at `http://localhost:5173`  
 ✅ PostgreSQL installed and running  
 ✅ PostgreSQL dashboard (pgAdmin or VSCode extension) accessible  
-✅ CSC425FA26 database created  
+✅ csc425fa26 database created  
 ✅ React app displays in browser and hot reload works  
 
 ## Getting Help
